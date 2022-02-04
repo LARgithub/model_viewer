@@ -1,0 +1,18 @@
+# version 400 core
+
+uniform mat4 transformationmatrix;
+uniform mat4 projectionmatrix;
+uniform mat4 viewmatrix;
+
+in vec3 position;
+
+out vec4 colour;
+
+void main(){
+
+    vec4 worldposition = transformationmatrix * vec4(position,1.0);
+    mat4 pvm = projectionmatrix * viewmatrix;
+    colour = sin(abs(worldposition) * 10) + cos(abs(vec4(position,1.0)) * 10);
+    gl_Position = pvm * worldposition;
+
+}
